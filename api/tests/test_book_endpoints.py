@@ -59,7 +59,7 @@ class TestBookEndpoints(APITestCase):
         expected_description = "Totally informative description"
         self.full_data['description'] = expected_description
         response = self.client.put(self.detail_url, data=self.full_data)
-        assert_equal(expected_description, response.data['descrption'])
+        assert_equal(expected_description, response.data['description'])
         assert_equal(expected_description, Book.objects.first().description)
 
     def test_delete_book(self):
@@ -74,7 +74,7 @@ class TestBookEndpoints(APITestCase):
         expected_books = Book.objects.count() + 1
         response = self.client.post(self.list_url, data=self.full_data)
         assert_equal(status.HTTP_201_CREATED, response.status_code)
-        assert_equal(Book.objects.count() + 1, Book.objects.count())
+        assert_equal(expected_books, Book.objects.count())
 
     def test_list_book(self):
         """GET /api/book/ should list all books"""

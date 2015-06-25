@@ -1,9 +1,10 @@
 from django.contrib.auth.models import User
 
-from rest_framework import viewsets
+from rest_framework import viewsets, generics
 
-from api.serializers import UserSerializer, BookSerializer, PublisherSerializer, AuthorSerializer
-from pinkflamingo.models import Book, Publisher, Author
+from api.serializers import UserSerializer, BookSerializer, PublisherSerializer, AuthorSerializer, RatingSerializer, \
+    AuthorBooksSerializer
+from pinkflamingo.models import Book, Publisher, Author, Rating
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -36,3 +37,13 @@ class PublisherViewSet(viewsets.ModelViewSet):
     """
     queryset = Publisher.objects.all()
     serializer_class = PublisherSerializer
+
+
+class RatingViewSet(viewsets.ModelViewSet):
+    queryset = Rating.objects.all()
+    serializer_class = RatingSerializer
+
+
+class AuthorBooks(generics.RetrieveAPIView):
+    queryset = Author.objects.all()
+    serializer_class = AuthorBooksSerializer

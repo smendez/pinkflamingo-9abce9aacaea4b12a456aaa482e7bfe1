@@ -39,7 +39,7 @@ class TestAuthorEndpoints(APITestCase):
         """PATCH /api/author/\d+/ should update the author"""
         expected_name = 'Story-bot'
         response = self.client.patch(self.detail_url, data={'name': expected_name})
-        assert_equal(status.HTTP_201_CREATED, response.status_code)
+        assert_equal(status.HTTP_200_OK, response.status_code)
         assert_equal(expected_name, response.data['name'])
 
     def test_put_author(self):

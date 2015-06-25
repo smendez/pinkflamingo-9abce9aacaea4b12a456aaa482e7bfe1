@@ -1,5 +1,5 @@
 # encoding: utf-8
-from __future__ import unicode_literals
+from __future__ import unicode_literals, division
 
 from django.db import models
 
@@ -13,6 +13,14 @@ class Book(models.Model):
 
     def __unicode__(self):
         return "{} - {}".format(self.title, self.authors.all())
+
+    def average_rating(self):
+        rating_values = Rating.objects.values_list('rating', flat=True).filter(book__pk=self.pk)
+
+        try:
+            return round(sum(rating_values)/len(rating_values), 1)
+        except ZeroDivisionError:
+            return 0
 
 
 class Publisher(models.Model):

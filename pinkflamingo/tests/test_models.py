@@ -18,10 +18,10 @@ class TestBooks(TestCase):
 
     def test_average_rating(self):
         """book.average_rating should return the average rating of the book"""
-        expected_rating = 2.5
+        expected_rating = 2.3
 
         Rating.objects.create(book=self.book, user=self.user, rating=1)
         Rating.objects.create(book=self.book, user=self.user, rating=1)
         Rating.objects.create(book=self.book, user=self.user, rating=5)
 
-        assert_equal(expected_rating, self.book.average_rating)
+        assert_equal(expected_rating, self.book.average_rating())
